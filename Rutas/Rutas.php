@@ -59,6 +59,10 @@ class Rutas{
 							break;
 
 						case "POST":
+
+							// Recibiendo datos
+							
+
 							$registro = new UsuariosControlador();
 							$registro->registrar($InformacionURI["ID"]);
 							break;

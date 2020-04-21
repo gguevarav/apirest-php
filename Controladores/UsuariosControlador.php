@@ -17,16 +17,26 @@ class UsuariosControlador{
 		echo json_encode($json, true);
 	}
 
-	// Mostrar los registros de usuario
+	// Mostrar los registros de Equipo
 	public function mostrar($id){
 		// Verificamos si hay un id
 		if($id != null){
+			// Instanciamos el método de la clase para obtener todos los Usuarios.
+			$Usuarios = UsuariosModelo::mostrar($id);
+			// Creamos un Json con la respuesta
 			$json = array(
-						"detalle" => "Usuario GET : " . $id
-					);
+						"status" => 200,
+						"cantidad_usuarios" => count($Usuarios),
+						"detalle" => $Usuarios
+				 	);
 		}else{
+			// Instanciamos el método de la clase para obtener todos los Usuarios.
+			$Usuarios = UsuariosModelo::mostrar(null);
+			// Creamos un Json con la respuesta
 			$json = array(
-						"detalle" => "Usuarios GET"
+						"status" => 200,
+						"cantidad_usuarios" => count($Usuarios),
+						"detalle" => $Usuarios
 				 	);
 		}
 		// Mostramos el json

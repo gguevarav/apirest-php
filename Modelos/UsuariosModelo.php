@@ -2,12 +2,12 @@
 
 require_once "Coneccion.php";
 
-class EquiposModelo{
+class UsuariosModelo{
 	// Mostrar todos los cursos
 	public function mostrar($id){
 		// Parametros para uso de tablas de la base de datos
-		$Tabla = "equipo";
-		$idTabla = "idEquipo";
+		$Tabla = "usuario";
+		$idTabla = "idUsuario";
 
 		// Si recibimos un id significa que solo queremos obtener un único registro.
 		if($id != null){

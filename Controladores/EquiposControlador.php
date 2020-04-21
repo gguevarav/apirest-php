@@ -21,12 +21,22 @@ class EquiposControlador{
 	public function mostrar($id){
 		// Verificamos si hay un id
 		if($id != null){
+			// Instanciamos el método de la clase para obtener todos los equipos.
+			$Equipos = EquiposModelo::mostrar($id);
+			// Creamos un Json con la respuesta
 			$json = array(
-						"detalle" => "Equipo GET : " . $id
-					);
+						"status" => 200,
+						"cantidad_equipos" => count($Equipos),
+						"detalle" => $Equipos
+				 	);
 		}else{
+			// Instanciamos el método de la clase para obtener todos los equipos.
+			$Equipos = EquiposModelo::mostrar(null);
+			// Creamos un Json con la respuesta
 			$json = array(
-						"detalle" => "Equipos GET"
+						"status" => 200,
+						"cantidad_equipos" => count($Equipos),
+						"detalle" => $Equipos
 				 	);
 		}
 		// Mostramos el json
