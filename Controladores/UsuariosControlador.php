@@ -2,17 +2,41 @@
 
 class UsuariosControlador{
 	// Crear un registro de Usuario
-	public function registrar($id){
-		// Verificamos si hay un id
-		if($id != null){
+	public function registrar($datos){
+		// Pare registrar debemos validar los datos que estamos recibiendo
+		// Validamos el Nombre del usuario
+		if(isset($datos["NombreUsuario"]) && !preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/', $datos["NombreUsuario"])){
 			$json = array(
-						"detalle" => "Usuario POST : " . $id
+						"status" => 404,
+						"detalle" => "Error en el campo, solo se permiten letras."
 					);
-		}else{
-			$json = array(
-						"detalle" => "Usuarios POST"
-				 	);
 		}
+		// Validamos el Apellido del usuario
+		if(isset($datos["ApellidoUsuario"]) && !preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/', $datos["ApellidoUsuario"])){
+			$json = array(
+						"status" => 404,
+						"detalle" => "Error en el campo, solo se permiten letras."
+					);
+		}
+		// Validamos el Correo del usuario
+		if(isset($datos["CorreoUsuario"]) && !preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $datos["CorreoUsuario"])){
+			$json = array(
+						"status" => 404,
+						"detalle" => "Error correo no válido."
+					);
+		}else if(UsuariosModelo::VarificarCorreoExistente($datos["CorreoUsuario"])){
+			$json = array(
+						"status" => 404,
+						"detalle" => "Error, el correo ya está registrado."
+					);
+		}
+		else{
+			$json = array(
+						"status" => 202,
+						"detalle" => "Correo Válido."
+					);
+		}
+		// Validamos que el email no esté repetido
 		// Mostramos el json
 		echo json_encode($json, true);
 	}

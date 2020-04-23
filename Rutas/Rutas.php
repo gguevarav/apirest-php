@@ -61,10 +61,14 @@ class Rutas{
 						case "POST":
 
 							// Recibiendo datos
-							
+							$datos = array("NombreUsuario" => $_POST['NombreUsuario'],
+										   "ApellidoUsuario" => $_POST['ApellidoUsuario'],
+										   "CorreoUsuario" => $_POST['CorreoUsuario'],
+										   "ContraseniaUsuario" => $_POST['ContraseniaUsuario']
+										);
 
 							$registro = new UsuariosControlador();
-							$registro->registrar($InformacionURI["ID"]);
+							$registro->registrar($datos);
 							break;
 					}
 				}
